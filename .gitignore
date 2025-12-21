@@ -1,13 +1,41 @@
-
+# Clarinet
+.cache/
+history.txt
+costs-reports.json
 **/settings/Mainnet.toml
 **/settings/Testnet.toml
-.cache/**
-history.txt
 
-logs
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Next.js
+.next/
+out/
+build/
+.next/cache/
+
+# Production
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
 *.log
 npm-debug.log*
-coverage
-*.info
-costs-reports.json
-node_modules
+yarn-debug.log*
+yarn-error.log*
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Misc
+.vercel
+*.tsbuildinfo
