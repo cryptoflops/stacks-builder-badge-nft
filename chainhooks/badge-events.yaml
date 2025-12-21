@@ -17,7 +17,7 @@ networks:
   mainnet:
     if_this:
       scope: contract
-      contract_identifier: SP1TN1ERKXEM2H9TKKWGPGZVNVNEKS92M7M3CKVJJ.builder-badge
+      contract_identifier: SP1TN1ERKXEM2H9TKKWGPGZVNVNEKS92M3CKVJJ.builder-badge
       events:
         - print_event
     then_that:
