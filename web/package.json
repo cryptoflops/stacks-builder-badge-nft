@@ -9,17 +9,17 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "next": "15.1.5",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "@stacks/auth": "^7.3.1",
     "@stacks/connect-react": "^23.1.4",
     "@stacks/network": "^7.3.1",
     "@stacks/transactions": "^7.3.1",
-    "@stacks/auth": "^7.3.1",
-    "tailwind-merge": "^2.5.5",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.15.0",
     "lucide-react": "^0.468.0",
-    "framer-motion": "^11.15.0"
+    "next": "^16.1.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
