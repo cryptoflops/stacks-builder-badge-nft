@@ -1,0 +1,19 @@
+{
+    "name": "Builder Badge #1",
+    "description": "This badge grants early access to upcoming features and exclusive community recognition. A token of appreciation for early builders in the Stacks ecosystem.",
+    "image": "ipfs://QmYS79t3EaT6X5yK9nS1YhMscYjDyr75sX4zK2Mbm5b4aB/builder-badge.jpg",
+    "attributes": [
+        {
+            "trait_type": "Project",
+            "value": "Stacks Builder Badge"
+        },
+        {
+            "trait_type": "Edition",
+            "value": "Early Adopter"
+        },
+        {
+            "trait_type": "Designer",
+            "value": "Stacks Community"
+        }
+    ]
+}

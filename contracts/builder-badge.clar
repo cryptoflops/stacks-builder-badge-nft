@@ -25,7 +25,7 @@
 (define-non-fungible-token builder-badge uint)
 
 (define-data-var last-token-id uint u0)
-(define-data-var token-uri (string-ascii 256) "ipfs://Qmd286K6pohQcTKYqnS1YhMscYjDyr75sX4zK2Mbm5b4aB/1.json")
+(define-data-var token-uri (string-ascii 256) "ipfs://QmYS79t3EaT6X5yK9nS1YhMscYjDyr75sX4zK2Mbm5b4aB/1.json")
 
 ;; =========================================================================
 ;; SIP-009 STANDARD FUNCTIONS
