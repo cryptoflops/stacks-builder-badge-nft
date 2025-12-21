@@ -14,7 +14,11 @@ Builder Badge is a dual-utility Web3 platform built for the Stacks ecosystem. It
 - **NFT Minting:** A high-performance minting engine with SIP-016 compliant metadata on IPFS.
 - **PasskeyVault:** A secure personal vault using `secp256k1` signature verification for withdrawals.
 - **Stacks v7 Integration:** Seamless wallet connection using `@stacks/connect` with session persistence.
-- **Real-time Monitoring:** Integrated Chainhooks for monitoring contract events (mints, deposits, withdrawals).
+- **Real-time Monitoring:** Integrated [Chainhooks](./CHAINHOOKS.md) for monitoring contract events (mints, deposits, withdrawals).
+
+### Development Checklist
+- [x] **Verify:** Test minting UI and build integrity
+- [x] **Professionalize:** Premium README, LICENSE (MIT), [Chainhooks Guide](./CHAINHOOKS.md), and clean repo sync
 
 ---
 
