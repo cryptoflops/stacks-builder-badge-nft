@@ -10,8 +10,8 @@
 ;; =========================================================================
 
 (define-constant CONTRACT_OWNER tx-sender)
-(define-constant MINT_PRICE u5000000) ;; 5 STX
-(define-constant MAX_SUPPLY u1000)
+(define-constant MINT_PRICE u100000) ;; 0.1 STX
+(define-constant MAX_SUPPLY u3333)
 
 (define-constant ERR_NOT_AUTHORIZED (err u100))
 (define-constant ERR_SOLD_OUT (err u101))
@@ -25,7 +25,7 @@
 (define-non-fungible-token builder-badge uint)
 
 (define-data-var last-token-id uint u0)
-(define-data-var base-uri (string-ascii 100) "https://api.badges.xyz/token/")
+(define-data-var token-uri (string-ascii 256) "ipfs://Qmd286K6pohQcTKYqnS1YhMscYjDyr75sX4zK2Mbm5b4aB/1.json")
 
 ;; =========================================================================
 ;; SIP-009 STANDARD FUNCTIONS
@@ -36,10 +36,7 @@
 )
 
 (define-read-only (get-token-uri (token-id uint))
-  (ok (some (concat 
-    (var-get base-uri)
-    (concat (int-to-ascii token-id) ".json")
-  )))
+  (ok (some (var-get token-uri)))
 )
 
 (define-read-only (get-owner (token-id uint))
@@ -89,10 +86,10 @@
 ;; ADMIN FUNCTIONS
 ;; =========================================================================
 
-(define-public (set-base-uri (new-uri (string-ascii 100)))
+(define-public (set-token-uri (new-uri (string-ascii 256)))
   (begin
     (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_NOT_AUTHORIZED)
-    (var-set base-uri new-uri)
+    (var-set token-uri new-uri)
     (ok true)
   )
 )
