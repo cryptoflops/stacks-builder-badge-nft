@@ -19,10 +19,10 @@ To successfully deploy and run a Chainhook, you need three components:
 Your server must handle a JSON payload delivered via HTTP POST. A basic implementation is provided in the repository logic.
 
 ### Local Development (Tunneling)
-If your server is running on `localhost:3000`, you must use a tunneling service like [ngrok](https://ngrok.com/) to provide a public URL for the Hiro Platform to reach.
+If your server is running on `localhost:3002`, you must use a tunneling service like [ngrok](https://ngrok.com/) to provide a public URL for the Hiro Platform to reach.
 
 ```bash
-ngrok http 3000
+ngrok http 3002
 # Update the 'url' in your .yaml files with the ngrok forward address
 ```
 
@@ -30,12 +30,13 @@ ngrok http 3000
 For production, use your Vercel/Cloudflare deployment URL.
 - **Endpoint 1**: `/api/events` (Badge Mints)
 - **Endpoint 2**: `/api/vault-events` (Vault Actions)
+- **Activity API**: `/api/activity` (GET request for recent events)
 
 ---
 
 ## 📄 Step 2: Configure Predicates
 
-Review the files in the `/chainhooks` directory. Ensure the `contract_identifier` matches your deployed contracts.
+Review the files in the `/chainhooks` directory. Ensure the `contract_identifier` matches your deployed contracts and the URLs point to port `3002` (if local).
 
 - **`badge-events.yaml`**: Monitors `print_event` for `builder-badge`.
 - **`vault-events.yaml`**: Monitors `print_event` for `passkey-vault`.
@@ -60,7 +61,7 @@ If you prefer to run a local scanner:
 This local server receives JSON payloads from Chainhook.
 ```bash
 npm run server
-# Listening at http://localhost:3000/api/events
+# Listening at http://localhost:3002
 ```
 
 ### 2. Register Chainhook

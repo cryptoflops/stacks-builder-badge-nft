@@ -12,7 +12,7 @@ networks:
         - print_event
     then_that:
       http_post:
-        url: http://localhost:3000/api/vault-events
+        url: http://localhost:3002/api/vault-events
         authorization_header: Bearer secret-token
   mainnet:
     if_this:
@@ -22,5 +22,5 @@ networks:
         - print_event
     then_that:
       http_post:
-        url: http://localhost:3000/api/vault-events
+        url: http://localhost:3002/api/vault-events
         authorization_header: Bearer secret-token

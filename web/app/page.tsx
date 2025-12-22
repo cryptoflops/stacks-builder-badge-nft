@@ -11,6 +11,7 @@ import { Wallet, Shield, Zap, ExternalLink, Github, CheckCircle } from 'lucide-r
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { userSession } from '@/lib/stacks-session'
+import { ActivityFeed } from '@/components/ActivityFeed'
 
 export default function Home() {
   const { authenticate } = useConnect()
@@ -215,6 +216,44 @@ export default function Home() {
                     <div className="text-2xl font-black italic">BUILDER BADGE</div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative z-10 max-w-7xl mx-auto px-6 pb-32">
+        <div className="border-t border-white/10 pt-24">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+              <h2 className="text-4xl font-black tracking-tighter mb-4 italic uppercase">Recent Activity</h2>
+              <p className="text-white/60 max-w-md">Real-time network events for the Builder Badge collection and Vault. Powered by Hiro Chainhooks.</p>
+            </div>
+            <div className="flex items-center gap-2 text-[#F95500] bg-[#F95500]/10 px-4 py-2 rounded-full border border-[#F95500]/20 text-sm font-bold">
+              <div className="w-2 h-2 rounded-full bg-[#F95500] animate-ping" />
+              LIVE MONITORING
+            </div>
+          </div>
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <ActivityFeed />
+            </div>
+            <div className="bg-white/5 rounded-3xl p-8 border border-white/10 h-fit">
+              <h3 className="text-xl font-bold mb-4">Event Stats</h3>
+              <div className="space-y-6">
+                <div className="flex justify-between items-center pb-4 border-b border-white/5">
+                  <span className="text-white/40 text-sm">Status</span>
+                  <span className="text-green-500 text-sm font-bold flex items-center gap-2">
+                    <CheckCircle size={14} /> Synchronized
+                  </span>
+                </div>
+                <div className="flex justify-between items-center pb-4 border-b border-white/5">
+                  <span className="text-white/40 text-sm">Provider</span>
+                  <span className="text-white/80 text-sm font-mono">Hiro Platform</span>
+                </div>
+                <p className="text-[10px] text-white/20 mt-4 leading-relaxed italic">
+                  * Activities are detected using contract-level print events and reflected here with sub-second latency after block inclusion.
+                </p>
               </div>
             </div>
           </div>
