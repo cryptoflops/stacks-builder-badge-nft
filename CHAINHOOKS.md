@@ -19,11 +19,16 @@ To successfully deploy and run a Chainhook, you need three components:
 Your server must handle a JSON payload delivered via HTTP POST. A basic implementation is provided in the repository logic.
 
 ### Local Development (Tunneling)
-If your server is running on `localhost:3002`, you must use a tunneling service like [ngrok](https://ngrok.com/) to provide a public URL for the Hiro Platform to reach.
+If your server is running on `localhost:3002`, you must use a tunneling service to provide a public URL for the Hiro Platform to reach.
 
+#### Option 1: Localtunnel (Zero Installation - Recommended)
+```bash
+npx localtunnel --port 3002
+```
+
+#### Option 2: Ngrok (Requires Account)
 ```bash
 ngrok http 3002
-# Update the 'url' in your .yaml files with the ngrok forward address
 ```
 
 ### Production
