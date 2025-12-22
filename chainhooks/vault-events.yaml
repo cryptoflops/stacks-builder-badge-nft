@@ -8,8 +8,6 @@ networks:
     if_this:
       scope: print_event
       contract_identifier: ST1TN1ERKXEM2H9TKKWGPGZVNVNEKS92M7MAMP23P.passkey-vault
-      events:
-        - print_event
     then_that:
       http_post:
         url: http://localhost:3002/api/vault-events
@@ -18,8 +16,6 @@ networks:
     if_this:
       scope: print_event
       contract_identifier: SP1TN1ERKXEM2H9TKKWGPGZVNVNEKS92M7M3CKVJJ.passkey-vault
-      events:
-        - print_event
     then_that:
       http_post:
         url: http://localhost:3002/api/vault-events
