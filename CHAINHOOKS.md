@@ -55,6 +55,15 @@ Review the files in the `/chainhooks` directory. Ensure the `contract_identifier
 
 ### Option B: Local CLI
 If you prefer to run a local scanner:
+
+### 1. Start Event Server
+This local server receives JSON payloads from Chainhook.
+```bash
+npm run server
+# Listening at http://localhost:3000/api/events
+```
+
+### 2. Register Chainhook
 ```bash
 # Register a local chainhook instance
 clarinet chainhook register chainhooks/badge-events.yaml --mainnet
