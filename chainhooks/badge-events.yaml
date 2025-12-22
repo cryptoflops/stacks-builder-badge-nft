@@ -15,7 +15,7 @@ networks:
   mainnet:
     if_this:
       scope: print_event
-      contract_identifier: SP1TN1ERKXEM2H9TKKWGPGZVNVNEKS92M3CKVJJ.builder-badge
+      contract_identifier: SP1TN1ERKXEM2H9TKKWGPGZVNVNEKS92M7M3CKVJJ.builder-badge
     then_that:
       http_post:
         url: http://localhost:3002/api/events
