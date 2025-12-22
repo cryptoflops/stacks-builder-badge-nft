@@ -11,6 +11,17 @@ const DATA_FILE = path.join(process.cwd(), 'data', 'events.json');
 app.use(cors());
 app.use(bodyParser.json());
 
+// Security middleware for incoming hooks
+const authToken = process.env.EVENT_AUTH_TOKEN || 'secret-token';
+const verifyHook = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    const header = req.headers.authorization;
+    if (authToken && header !== `Bearer ${authToken}`) {
+        console.warn('⚠️ [SECURITY] Unauthorized Hook Attempt Blocked');
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+    next();
+};
+
 // Helper to save event to local file
 function saveEvent(event: any) {
     try {
@@ -77,7 +88,7 @@ app.get('/api/activity', (req, res) => {
 /**
  * Endpoint for Builder Badge NFT Events
  */
-app.post('/api/events', (req, res) => {
+app.post('/api/events', verifyHook, (req, res) => {
     const payload = req.body as ChainhookPayload;
     console.log('\n🎨 [NFT] Received Builder Badge Event');
 
@@ -95,7 +106,7 @@ app.post('/api/events', (req, res) => {
 /**
  * Endpoint for Passkey Vault Events
  */
-app.post('/api/vault-events', (req, res) => {
+app.post('/api/vault-events', verifyHook, (req, res) => {
     const payload = req.body as ChainhookPayload;
     console.log('\n🔒 [VAULT] Received Passkey Vault Event');
 
