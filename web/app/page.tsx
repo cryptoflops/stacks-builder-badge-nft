@@ -2,16 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { useConnect } from '@stacks/connect-react'
-import { STACKS_TESTNET } from '@stacks/network'
-import {
-  AnchorMode,
-  PostConditionMode
-} from '@stacks/transactions'
 import { Wallet, Shield, Zap, ExternalLink, Github, CheckCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { userSession } from '@/lib/stacks-session'
 import { ActivityFeed } from '@/components/ActivityFeed'
+import { config } from '@/lib/stacks-config'
 
 export default function Home() {
   const { authenticate } = useConnect()
@@ -31,7 +27,9 @@ export default function Home() {
 
   const isConnected = mounted && userSession.isUserSignedIn()
   const userData = isConnected ? userSession.loadUserData() : null
-  const address = userData?.profile?.stxAddress?.testnet
+  const address = config.networkName === 'mainnet'
+    ? userData?.profile?.stxAddress?.mainnet
+    : userData?.profile?.stxAddress?.testnet
 
   const handleConnect = () => {
     authenticate({
@@ -63,13 +61,13 @@ export default function Home() {
       const { openContractCall } = await import('@stacks/connect')
 
       await openContractCall({
-        network: STACKS_TESTNET,
-        anchorMode: AnchorMode.Any,
-        contractAddress: 'ST1TN1ERKXEM2H9TKKWGPGZVNVNEKS92M7MAMP23P',
-        contractName: 'builder-badge',
+        network: config.network,
+        anchorMode: 3, // AnchorMode.Any
+        contractAddress: config.badgeContractAddress,
+        contractName: config.badgeContractName,
         functionName: 'mint',
         functionArgs: [],
-        postConditionMode: PostConditionMode.Allow,
+        postConditionMode: 0x01, // PostConditionMode.Allow
         onFinish: (data: any) => {
           setTxId(data.txId)
           setIsMinting(false)
@@ -189,7 +187,7 @@ export default function Home() {
                   </div>
                 </div>
                 <a
-                  href={`https://explorer.hiro.so/txid/${txId}?chain=testnet`}
+                  href={`https://explorer.hiro.so/txid/${txId}?chain=${config.networkName}`}
                   target="_blank"
                   className="w-full bg-white/5 hover:bg-white/10 text-white font-medium h-12 rounded-lg flex items-center justify-center gap-2 transition-colors border border-white/10"
                 >

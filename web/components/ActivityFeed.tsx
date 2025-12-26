@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { Zap, Shield, User, Clock } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+import { config } from '@/lib/stacks-config'
+
 interface ActivityEvent {
     id: string
     timestamp: string
@@ -11,8 +13,6 @@ interface ActivityEvent {
     event: string
     user?: string
     buyer?: string
-    amount?: number
-    "token-id"?: string
     price?: number
 }
 
@@ -22,13 +22,29 @@ export function ActivityFeed() {
 
     const fetchActivity = async () => {
         try {
-            const res = await fetch('http://localhost:3002/api/activity')
+            // Fetch directly from Stacks Node API (Mainnet)
+            const apiUrl = config.networkName === 'mainnet'
+                ? 'https://api.hiro.so'
+                : 'https://api.testnet.hiro.so'
+
+            const res = await fetch(`${apiUrl}/extended/v1/address/${config.badgeContractAddress}/transactions?limit=5`)
+
             if (res.ok) {
                 const data = await res.json()
-                setEvents(data)
+                // Map Stacks transactions to our ActivityEvent format
+                const mappedEvents: ActivityEvent[] = data.results.map((tx: any) => ({
+                    id: tx.tx_id,
+                    timestamp: tx.burn_block_time_iso || new Date().toISOString(),
+                    type: 'nft_mint',
+                    event: tx.tx_type === 'contract_call' ? tx.contract_call.function_name : 'transaction',
+                    user: tx.sender_address,
+                    buyer: tx.sender_address,
+                    price: 100000 // Displaying raw 0.1 STX cost as per contract
+                }))
+                setEvents(mappedEvents)
             }
         } catch (error) {
-            console.error('Failed to fetch activity:', error)
+            console.error('Failed to fetch blockchain activity:', error)
         } finally {
             setLoading(false)
         }
@@ -36,7 +52,7 @@ export function ActivityFeed() {
 
     useEffect(() => {
         fetchActivity()
-        const interval = setInterval(fetchActivity, 5000)
+        const interval = setInterval(fetchActivity, 10000) // Poll every 10s
         return () => clearInterval(interval)
     }, [])
 
@@ -73,7 +89,7 @@ export function ActivityFeed() {
                         <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between gap-2">
                                 <p className="text-sm font-medium text-slate-200">
-                                    {event.type === 'nft_mint' ? 'Bundle Minted' :
+                                    {event.type === 'nft_mint' ? 'Badge Minted' :
                                         event.event === 'pubkey-registered' ? 'Vault Created' :
                                             event.event === 'deposit' ? 'STX Deposited' :
                                                 event.event === 'withdrawal' ? 'STX Withdrawn' : 'Vault Action'}
