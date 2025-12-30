@@ -41,8 +41,11 @@ Thumbs.db
 *.tsbuildinfo
 .env*.local
 
-# metadata
+
+# internal tools
 .agent/
+.vercel
+.env*.local
 *-agent.md
 STACKS_ENGINEER.md
 implementation_plan*.md
