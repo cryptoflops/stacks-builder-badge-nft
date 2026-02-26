@@ -34,7 +34,7 @@ describe("Builder Badge NFT (Edition Model)", () => {
       tx.callPublicFn("builder-badge", "mint", [], address1),
     ]);
 
-    const expectedUri = "ipfs://Qmd286K6pohQcTKYqnS1YhMscYjDyr75sX4zK2Mbm5b4aB/1.json";
+    const expectedUri = "ipfs://QmYS79t3EaT6X5yK9nS1YhMscYjDyr75sX4zK2Mbm5b4aB/1.json";
 
     // Check ID 1
     const uri1 = simnet.callReadOnlyFn(
