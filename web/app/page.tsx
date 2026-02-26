@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { userSession } from '@/lib/stacks-session'
 import { ActivityFeed } from '@/components/ActivityFeed'
-import { config } from '@/lib/stacks-config'
+import { getConfig, getNetworkMode, setNetworkMode } from '@/lib/stacks-config'
 
 export default function Home() {
   const { authenticate } = useConnect()
@@ -15,8 +15,10 @@ export default function Home() {
   const [isMinting, setIsMinting] = useState(false)
   const [txId, setTxId] = useState<string | null>(null)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [networkMode, setMode] = useState<'mainnet' | 'testnet'>('mainnet')
 
   useEffect(() => {
+    setMode(getNetworkMode())
     setMounted(true)
     // Log session state for debugging
     console.log('Stacks Session State:', {
@@ -24,6 +26,8 @@ export default function Home() {
       userData: userSession.isUserSignedIn() ? userSession.loadUserData() : 'none'
     })
   }, [])
+
+  const config = getConfig()
 
   const isConnected = mounted && userSession.isUserSignedIn()
   const userData = isConnected ? userSession.loadUserData() : null
@@ -97,6 +101,12 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-[#F95500] rounded flex items-center justify-center font-bold text-black italic">S</div>
             <span className="font-semibold tracking-tight text-xl">Stacks Builder</span>
+            <button
+              onClick={() => setNetworkMode(networkMode === "mainnet" ? "testnet" : "mainnet")}
+              className="ml-4 text-[10px] font-mono uppercase tracking-widest text-[#F95500] hover:text-white transition-colors border border-[#F95500]/30 px-2 py-1 rounded"
+            >
+              NET: <span className={networkMode === "mainnet" ? "text-amber-500" : "text-emerald-500"}>{networkMode}</span> ⇄
+            </button>
           </div>
 
           <div className="flex items-center gap-6">

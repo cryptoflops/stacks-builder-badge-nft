@@ -1,28 +1,31 @@
 import { STACKS_MAINNET, STACKS_TESTNET } from '@stacks/network';
 
-// 🛑 FORCE MAINNET: Bypassing env vars to ensure production stability
-// The discrepancy between Vercel env vars and client-side execution caused Testnet fallback
-// which conflicts with the user's Mainnet wallet.
-const isMainnet = true;
+export type NetworkMode = "mainnet" | "testnet";
 
-// Validated Mainnet Address from 'default.mainnet-plan.yaml' (41 chars)
-// Previous attempt with 39 chars was likely invalid/truncated, causing 'Unexpected error'.
-const ADDRESS_MAINNET = 'SP1TN1ERKXEM2H9TKKWGPGZVNVNEKS92M7M3CKVJJ';
-const ADDRESS_TESTNET = 'ST1TN1ERKXEM2H9TKKWGPGZVNVNEKS92M7MAMP23P';
+export function getNetworkMode(): NetworkMode {
+    if (typeof window !== "undefined") {
+        const stored = localStorage.getItem("stacks-network-mode");
+        if (stored === "mainnet" || stored === "testnet") return stored;
+    }
+    return "mainnet";
+}
 
-export const config = {
-    network: isMainnet ? STACKS_MAINNET : STACKS_TESTNET,
-    networkName: isMainnet ? 'mainnet' : 'testnet',
+export function setNetworkMode(mode: NetworkMode) {
+    if (typeof window !== "undefined") {
+        localStorage.setItem("stacks-network-mode", mode);
+        window.location.reload();
+    }
+}
 
-    badgeContractAddress: isMainnet ? ADDRESS_MAINNET : ADDRESS_TESTNET,
-    badgeContractName: 'builder-badge',
+export function getConfig() {
+    const isMainnet = getNetworkMode() === "mainnet";
 
-    vaultContractAddress: isMainnet ? ADDRESS_MAINNET : ADDRESS_TESTNET,
-    vaultContractName: 'passkey-vault',
-};
-
-console.log('Stacks Config Locked:', {
-    network: config.networkName,
-    badgeAddress: config.badgeContractAddress,
-    forcedMainnet: isMainnet
-});
+    return {
+        network: isMainnet ? STACKS_MAINNET : STACKS_TESTNET,
+        networkName: isMainnet ? 'mainnet' : 'testnet',
+        badgeContractAddress: isMainnet ? ADDRESS_MAINNET : ADDRESS_TESTNET,
+        badgeContractName: 'builder-badge',
+        vaultContractAddress: isMainnet ? ADDRESS_MAINNET : ADDRESS_TESTNET,
+        vaultContractName: 'passkey-vault',
+    };
+}

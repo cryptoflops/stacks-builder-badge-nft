@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Zap, Shield, User, Clock } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-import { config } from '@/lib/stacks-config'
+import { getConfig } from '@/lib/stacks-config'
 
 interface ActivityEvent {
     id: string
@@ -21,8 +21,9 @@ export function ActivityFeed() {
     const [loading, setLoading] = useState(true)
 
     const fetchActivity = async () => {
+        const config = getConfig();
         try {
-            // Fetch directly from Stacks Node API (Mainnet)
+            // Fetch directly from Stacks Node API
             const apiUrl = config.networkName === 'mainnet'
                 ? 'https://api.hiro.so'
                 : 'https://api.testnet.hiro.so'
