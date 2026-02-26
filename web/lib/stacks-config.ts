@@ -17,6 +17,9 @@ export function setNetworkMode(mode: NetworkMode) {
     }
 }
 
+const ADDRESS_MAINNET = 'SP1TN1ERKXEM2H9TKKWGPGZVNVNEKS92M7M3CKVJJ';
+const ADDRESS_TESTNET = 'ST1TN1ERKXEM2H9TKKWGPGZVNVNEKS92M7MAMP23P';
+
 export function getConfig() {
     const isMainnet = getNetworkMode() === "mainnet";
 
