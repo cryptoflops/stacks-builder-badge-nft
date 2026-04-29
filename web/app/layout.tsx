@@ -11,11 +11,18 @@ export const metadata: Metadata = {
   description: "Mint your limited edition Builder Badge on Stacks",
 };
 
+import { authenticate } from '../src/lib/stacks-integration';
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Stacks ecosystem connectivity
+  if (typeof window !== 'undefined') {
+    console.info('Stacks connection layer loaded:', authenticate);
+  }
+
   return (
     <html lang="en">
       <body className={inter.className}>
