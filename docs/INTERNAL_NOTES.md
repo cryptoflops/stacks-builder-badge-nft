@@ -8,3 +8,4 @@
 - Reviewed component tree performance, seems stable.
 - Adjusting padding to align with design specs.
 - Adjusting padding to align with design specs.
+- Testing new layout constraints for edge cases.
