@@ -102,3 +102,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## 👥 Community & Support
 - **Author:** [cryptoflops](https://github.com/cryptoflops)
 - **Project Link:** [https://web-stacks-builder-badge-nft.vercel.app](https://web-m33syx3kv-cryptoflops00-3036s-projects.vercel.app)
+
