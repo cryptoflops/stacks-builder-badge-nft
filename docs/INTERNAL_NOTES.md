@@ -16,3 +16,4 @@
 - Adjusting padding to align with design specs.
 - Cleaned up some dead code in the utility helpers.
 - Adjusting padding to align with design specs.
+- Investigated rendering jitter on mobile layout.
