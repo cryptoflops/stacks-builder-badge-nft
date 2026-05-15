@@ -21,3 +21,4 @@
 - Adjusting padding to align with design specs.
 - Pushing work-in-progress state before context switch.
 - Verified backward compatibility with older Stacks API responses.
+- Need to look into optimizing the context providers later.
