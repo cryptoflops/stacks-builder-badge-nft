@@ -25,3 +25,4 @@
 - Adjusting padding to align with design specs.
 - Fixed a minor typo in the internal documentation.
 - Pushing work-in-progress state before context switch.
+- Investigated rendering jitter on mobile layout.
