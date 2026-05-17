@@ -24,3 +24,4 @@
 - Need to look into optimizing the context providers later.
 - Adjusting padding to align with design specs.
 - Fixed a minor typo in the internal documentation.
+- Pushing work-in-progress state before context switch.
