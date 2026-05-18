@@ -26,3 +26,4 @@
 - Fixed a minor typo in the internal documentation.
 - Pushing work-in-progress state before context switch.
 - Investigated rendering jitter on mobile layout.
+- Contract calls via openContractCall work fine but the transaction broadcast can take 10-30 blocks.
