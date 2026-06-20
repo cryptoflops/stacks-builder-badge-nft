@@ -1,9 +1,8 @@
 {
-  "name": "builder-badge-nft",
+  "name": "@cryptoflops/builder-badge-nft",
   "version": "1.0.0",
   "description": "Premium Stacks-native NFT collection and vault system.",
   "type": "module",
-  "private": true,
   "scripts": {
     "test": "vitest run",
     "test:report": "vitest run -- --coverage --costs",
@@ -31,5 +30,8 @@
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
